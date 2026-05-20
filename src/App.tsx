@@ -260,6 +260,16 @@ function App() {
     setStoppedAt(null)
   }
 
+  const onPause = () => {
+    if (status !== 'running') return
+    setStatus('paused')
+  }
+
+  const onResume = () => {
+    if (status !== 'paused') return
+    setStatus('running')
+  }
+
   const onStop = () => {
     setHistory((prev) => [
       {
@@ -366,6 +376,15 @@ function App() {
         </div>
 
         <div className="running-actions">
+          {status === 'running' ? (
+            <button className="btn-pause" onClick={onPause}>
+              Tạm dừng
+            </button>
+          ) : (
+            <button className="btn-resume" onClick={onResume}>
+              Tiếp tục
+            </button>
+          )}
           <button className="btn-restart" onClick={onRestart}>
             Khởi động lại
           </button>
